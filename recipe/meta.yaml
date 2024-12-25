@@ -6,24 +6,24 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/micrometa-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/micrometa-{{ version }}.tar.gz
   sha256: d3b9fa087a9651e5b4e5b4cfa9731bcd0e73e24ad2594aa3591d0493fd7a6591
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - configparser
     - luddite
     - natsort
     - packaging
-    - python >=3.6
+    - python >={{ python_min }}
     - pyyaml
 
 test:
@@ -34,6 +34,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/adamltyson/micrometa
